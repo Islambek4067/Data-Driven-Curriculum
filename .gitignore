@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.streamlit/secrets.toml
+.claude/
+
+# Данные: демо генерируется при запуске, TIMSS не распространяем (лицензия IEA)
+data/
+
+# Материалы для питча и файл кейса не публикуем
+pitch/
+pitch_kz/
+*.docx
