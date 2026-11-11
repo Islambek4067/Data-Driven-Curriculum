@@ -148,6 +148,17 @@ except np.linalg.LinAlgError:
     st.error(t("model_failed"))
     st.stop()
 
+if (ds.is_demo or ds.is_timss) and not st.session_state.get("intro_closed"):
+    kind = "timss" if ds.is_timss else "demo"
+    with st.container(border=True):
+        text_col, button_col = st.columns([6, 1], vertical_alignment="center")
+        with text_col:
+            st.markdown(f"**{t('intro_title')}** {t(f'intro_{kind}_body')}")
+            st.markdown(f"**{t('intro_start')}** {t(f'intro_{kind}_start')}")
+        if button_col.button(t("intro_ok"), width="stretch"):
+            st.session_state["intro_closed"] = True
+            st.rerun()
+
 names = ds.topics.set_index("topic_id")[f"name_{lang()}"].to_dict()
 books: list[str] = bundle.textbooks["books"] if bundle.textbooks else []
 if ds.is_timss:
